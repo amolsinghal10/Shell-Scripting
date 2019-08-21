@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# specify palindrome possibility as args
+  echo "**************USAGE**************************"
+  echo "Please provide possible palindrome as First parameter to $0" >&2
+  echo  Non aplhabets will be removed   
+  echo -e "**************USAGE**************************\n"
+if [ $# -eq 0 ] ; then
+  echo -e "\n---No parameter passed to $0----" >&2
+  exit 1
+fi
+
+ppalindrome="$(echo $@ | sed 's/[^[:alpha:]]//g' | tr '[:upper:]' '[:lower:]')"
+backwards="$(echo $ppalindrome | rev)"
+
+if [ "$ppalindrome" = "$backwards" ] ; then
+  echo -e "\t$ppalindrome is a palindrome"
+else
+  echo -e "\t$ppalindrome is not a palindrome"
+fi
+
+exit 0
